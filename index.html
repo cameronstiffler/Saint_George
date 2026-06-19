@@ -37,6 +37,12 @@
       margin-bottom:54px;
     }
     .brand { font-weight:800; font-size:20px; }
+    .nav-actions {
+      display:flex;
+      gap:18px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
     .nav-link { color:#fff; text-decoration:none; font-weight:700; }
     h1 {
       font-size:48px;
@@ -107,6 +113,7 @@
       gap:12px;
     }
     .contact-note { color:var(--muted); margin-bottom:0; }
+    .contact-list a { color:var(--green); font-weight:700; }
     footer {
       padding:28px 20px;
       background:#0f2415;
@@ -116,7 +123,8 @@
     @media (max-width:800px) {
       h1 { font-size:36px; }
       .grid, .two, .form-row { grid-template-columns:1fr; }
-      nav { align-items:flex-start; flex-direction:column; margin-bottom:38px; }
+      nav, .nav-actions { align-items:flex-start; flex-direction:column; margin-bottom:38px; }
+      .nav-actions { gap:10px; margin-bottom:0; }
     }
   </style>
 </head>
@@ -125,7 +133,10 @@
   <div class="wrap">
     <nav>
       <div class="brand">Saint George</div>
-      <a class="nav-link" href="#contact">Request a Quote</a>
+      <div class="nav-actions">
+        <a class="nav-link" href="tel:+14158183367">(415) 818-3367</a>
+        <a class="nav-link" href="#contact">Request a Quote</a>
+      </div>
     </nav>
     <div class="hero">
       <h1>Austin Commercial Lawn Care & Grounds Maintenance</h1>
@@ -166,6 +177,10 @@
     <div class="contact-box">
       <h2>Request a Walkthrough</h2>
       <p>Send the property address and the service needed. Saint George will follow up to schedule a walkthrough and quote.</p>
+      <p class="contact-list">
+        <strong>Call:</strong> <a href="tel:+14158183367">(415) 818-3367</a><br>
+        <strong>Email:</strong> <a href="mailto:cameronstiffler@gmail.com">cameronstiffler@gmail.com</a>
+      </p>
       <form id="quote-form">
         <label for="request-type">Request type</label>
         <select id="request-type" name="request-type">
@@ -236,7 +251,7 @@
       data.get("details")
     ].join("\n");
 
-    window.location.href = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    window.location.href = "mailto:cameronstiffler@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     formNote.textContent = "Your email app should open with the request details filled in.";
   });
 </script>
