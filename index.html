@@ -205,7 +205,7 @@
         <p>
           <button class="btn dark" type="submit">Send Request</button>
         </p>
-        <p class="contact-note" id="form-note">This opens an email draft with your request details.</p>
+        <p class="contact-note" id="form-note">This opens a text message with your request details.</p>
       </form>
     </div>
   </div>
@@ -224,8 +224,9 @@
     event.preventDefault();
 
     const data = new FormData(form);
-    const subject = "Quote request for Saint George";
-    const body = [
+    const message = [
+      "Quote request for Saint George",
+      "",
       "Name: " + data.get("name"),
       "Phone: " + data.get("phone"),
       "Email: " + data.get("email"),
@@ -235,8 +236,8 @@
       data.get("details")
     ].join("\n");
 
-    window.location.href = "mailto:cameronstiffler@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-    formNote.textContent = "Your email app should open with the request details filled in.";
+    window.location.href = "sms:+14158183367?&body=" + encodeURIComponent(message);
+    formNote.textContent = "Your text app should open with the request details filled in.";
   });
 </script>
 </body>
