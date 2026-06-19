@@ -91,6 +91,10 @@
       height:auto;
       margin:-18px -12px 0 auto;
     }
+    .hero-video {
+      aspect-ratio:1 / 1;
+      object-fit:contain;
+    }
     .btns { display:flex; gap:14px; flex-wrap:wrap; }
     .btn {
       display:inline-block;
@@ -199,7 +203,9 @@
           <a class="btn secondary" href="tel:+14158183367">Call Now</a>
         </div>
       </div>
-      <img class="hero-logo" src="logo/current/site-logo-detail.png" width="1200" height="1200" alt="Saint George Landscaping logo">
+      <video class="hero-logo hero-video" autoplay muted loop playsinline poster="logo/current/site-logo-detail.png" aria-label="Saint George Landscaping topiary video">
+        <source src="img/Man_shapes_dragon_topiary_202606190600.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </header>
