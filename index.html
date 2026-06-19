@@ -142,8 +142,8 @@
       <h1>Austin Commercial Lawn Care & Grounds Maintenance</h1>
       <p>Reliable mowing, edging, cleanup, and recurring exterior maintenance for apartments, churches, schools, offices, HOAs, and large properties.</p>
       <div class="btns">
-        <a class="btn primary" href="#contact" data-request-type="quote">Request a Quote</a>
-        <a class="btn secondary" href="#contact" data-request-type="walkthrough">Book a Walkthrough</a>
+        <a class="btn primary" href="#contact">Request a Quote</a>
+        <a class="btn secondary" href="tel:+14158183367">Call Now</a>
       </div>
     </div>
   </div>
@@ -175,19 +175,13 @@
       </ul>
     </div>
     <div class="contact-box">
-      <h2>Request a Walkthrough</h2>
-      <p>Send the property address and the service needed. Saint George will follow up to schedule a walkthrough and quote.</p>
+      <h2>Request a Quote</h2>
+      <p>Send the property address and the service needed. Saint George will follow up with next steps for a quote.</p>
       <p class="contact-list">
         <strong>Call:</strong> <a href="tel:+14158183367">(415) 818-3367</a><br>
         <strong>Email:</strong> <a href="mailto:cameronstiffler@gmail.com">cameronstiffler@gmail.com</a>
       </p>
       <form id="quote-form">
-        <label for="request-type">Request type</label>
-        <select id="request-type" name="request-type">
-          <option value="Quote request">Quote request</option>
-          <option value="Walkthrough request">Walkthrough request</option>
-        </select>
-
         <div class="form-row">
           <div>
             <label for="name">Name</label>
@@ -223,24 +217,14 @@
   </div>
 </footer>
 <script>
-  const requestType = document.getElementById("request-type");
-  const details = document.getElementById("details");
   const form = document.getElementById("quote-form");
   const formNote = document.getElementById("form-note");
-
-  document.querySelectorAll("[data-request-type]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const type = button.dataset.requestType;
-      requestType.value = type === "walkthrough" ? "Walkthrough request" : "Quote request";
-      details.focus({ preventScroll:true });
-    });
-  });
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const data = new FormData(form);
-    const subject = data.get("request-type") + " for Saint George";
+    const subject = "Quote request for Saint George";
     const body = [
       "Name: " + data.get("name"),
       "Phone: " + data.get("phone"),
