@@ -20,7 +20,8 @@ const CONFIG = {
   followUpDelayDays: 7,
   dryRun: true, // Logs email output without sending or changing lead status.
   testMode: true, // While true, only the testRecipientEmail can receive email.
-  testRecipientEmail: "cameronstiffler@gmail.com"
+  testRecipientEmail: "cameronstiffler@gmail.com",
+  logoUrl: "https://cameronstiffler.github.io/Saint_George/logo/puck.png"
 };
 
 const COL = {
@@ -69,12 +70,14 @@ function sendDailyOutreach() {
     const lead = rowToLead_(row);
     const subject = "Commercial lawn care for your Austin property";
     const body = buildInitialEmail_(lead, settings);
+    const htmlBody = buildHtmlEmail_(body, settings);
 
     if (CONFIG.dryRun) {
-      Logger.log("DRY RUN - would send to " + email + "\n" + subject + "\n" + body);
+      Logger.log("DRY RUN - would send to " + email + "\n" + subject + "\n" + body + "\n\nHTML:\n" + htmlBody);
     } else {
       GmailApp.sendEmail(email, subject, body, {
-        name: settings.senderName || settings.businessName || "Landscaping Services"
+        name: settings.senderName || settings.businessName || "Landscaping Services",
+        htmlBody: htmlBody
       });
     }
 
@@ -116,12 +119,14 @@ function sendFollowUps() {
     const lead = rowToLead_(row);
     const subject = "Following up on lawn care quote";
     const body = buildFollowUpEmail_(lead, settings);
+    const htmlBody = buildHtmlEmail_(body, settings);
 
     if (CONFIG.dryRun) {
-      Logger.log("DRY RUN - would follow up to " + email + "\n" + subject + "\n" + body);
+      Logger.log("DRY RUN - would follow up to " + email + "\n" + subject + "\n" + body + "\n\nHTML:\n" + htmlBody);
     } else {
       GmailApp.sendEmail(email, subject, body, {
-        name: settings.senderName || settings.businessName || "Landscaping Services"
+        name: settings.senderName || settings.businessName || "Landscaping Services",
+        htmlBody: htmlBody
       });
     }
 
@@ -240,6 +245,31 @@ function buildFollowUpEmail_(lead, settings) {
     "",
     "To opt out of future emails from us, reply with “unsubscribe.”"
   ].join("\n");
+}
+
+function buildHtmlEmail_(plainText, settings) {
+  const safeBody = escapeHtml_(plainText).replace(/\n/g, "<br>");
+  const logoHtml = CONFIG.logoUrl
+    ? '<p style="margin:0 0 18px;"><img src="' + escapeHtml_(CONFIG.logoUrl) + '" alt="' + escapeHtml_(settings.businessName) + ' logo" width="96" style="display:block;width:96px;max-width:96px;height:auto;border:0;"></p>'
+    : "";
+
+  return [
+    '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.5;color:#172217;">',
+    logoHtml,
+    '<div>',
+    safeBody,
+    '</div>',
+    '</div>'
+  ].join("");
+}
+
+function escapeHtml_(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 function contactTeamLabel_(lead) {
