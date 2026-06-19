@@ -61,6 +61,7 @@
     }
     .btn.primary { background:#fff; color:var(--green); }
     .btn.secondary { border:1px solid rgba(255,255,255,.7); color:#fff; }
+    .btn.dark { background:var(--green); color:#fff; border:0; cursor:pointer; }
     section { padding:52px 20px; }
     h2 { margin-top:0; }
     .grid {
@@ -89,6 +90,22 @@
       padding:24px;
       background:#fff;
     }
+    label { display:block; font-weight:700; margin:14px 0 6px; }
+    input, select, textarea {
+      width:100%;
+      border:1px solid #bdd6bd;
+      border-radius:8px;
+      padding:12px;
+      font:inherit;
+      color:var(--ink);
+      background:#fff;
+    }
+    textarea { min-height:108px; resize:vertical; }
+    .form-row {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
     .contact-note { color:var(--muted); margin-bottom:0; }
     footer {
       padding:28px 20px;
@@ -98,7 +115,7 @@
     }
     @media (max-width:800px) {
       h1 { font-size:36px; }
-      .grid, .two { grid-template-columns:1fr; }
+      .grid, .two, .form-row { grid-template-columns:1fr; }
       nav { align-items:flex-start; flex-direction:column; margin-bottom:38px; }
     }
   </style>
@@ -114,8 +131,8 @@
       <h1>Austin Commercial Lawn Care & Grounds Maintenance</h1>
       <p>Reliable mowing, edging, cleanup, and recurring exterior maintenance for apartments, churches, schools, offices, HOAs, and large properties.</p>
       <div class="btns">
-        <a class="btn primary" href="#contact">Request a Quote</a>
-        <a class="btn secondary" href="#contact">Book a Walkthrough</a>
+        <a class="btn primary" href="#contact" data-request-type="quote">Request a Quote</a>
+        <a class="btn secondary" href="#contact" data-request-type="walkthrough">Book a Walkthrough</a>
       </div>
     </div>
   </div>
@@ -149,7 +166,38 @@
     <div class="contact-box">
       <h2>Request a Walkthrough</h2>
       <p>Send the property address and the service needed. Saint George will follow up to schedule a walkthrough and quote.</p>
-      <p class="contact-note">Contact details and quote form link can be connected here when available.</p>
+      <form id="quote-form">
+        <label for="request-type">Request type</label>
+        <select id="request-type" name="request-type">
+          <option value="Quote request">Quote request</option>
+          <option value="Walkthrough request">Walkthrough request</option>
+        </select>
+
+        <div class="form-row">
+          <div>
+            <label for="name">Name</label>
+            <input id="name" name="name" autocomplete="name" required>
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" autocomplete="tel">
+          </div>
+        </div>
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+
+        <label for="property">Property address</label>
+        <input id="property" name="property" autocomplete="street-address" required>
+
+        <label for="details">Services needed</label>
+        <textarea id="details" name="details" required></textarea>
+
+        <p>
+          <button class="btn dark" type="submit">Send Request</button>
+        </p>
+        <p class="contact-note" id="form-note">This opens an email draft with your request details.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -159,5 +207,38 @@
     Saint George - Serving Austin, Texas and nearby areas
   </div>
 </footer>
+<script>
+  const requestType = document.getElementById("request-type");
+  const details = document.getElementById("details");
+  const form = document.getElementById("quote-form");
+  const formNote = document.getElementById("form-note");
+
+  document.querySelectorAll("[data-request-type]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const type = button.dataset.requestType;
+      requestType.value = type === "walkthrough" ? "Walkthrough request" : "Quote request";
+      details.focus({ preventScroll:true });
+    });
+  });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const data = new FormData(form);
+    const subject = data.get("request-type") + " for Saint George";
+    const body = [
+      "Name: " + data.get("name"),
+      "Phone: " + data.get("phone"),
+      "Email: " + data.get("email"),
+      "Property address: " + data.get("property"),
+      "",
+      "Services needed:",
+      data.get("details")
+    ].join("\n");
+
+    window.location.href = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    formNote.textContent = "Your email app should open with the request details filled in.";
+  });
+</script>
 </body>
 </html>
