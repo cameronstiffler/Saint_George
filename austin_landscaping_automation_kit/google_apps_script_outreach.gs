@@ -16,9 +16,11 @@
 const CONFIG = {
   leadsSheetName: "Leads",
   dashboardSheetName: "Dashboard",
-  dailySendLimit: 20,
+  dailySendLimit: 5,
   followUpDelayDays: 7,
-  dryRun: true // Change to false only after testing.
+  dryRun: true, // Logs email output without sending or changing lead status.
+  testMode: true, // While true, only the testRecipientEmail can receive email.
+  testRecipientEmail: "cameronstiffler@gmail.com"
 };
 
 const COL = {
@@ -62,6 +64,7 @@ function sendDailyOutreach() {
     const optedOut = row[COL.OPTED_OUT - 1] === true;
 
     if (status !== "Ready to Email" || !email || optedOut) continue;
+    if (CONFIG.testMode && !isTestRecipient_(email)) continue;
 
     const lead = rowToLead_(row);
     const subject = "Commercial lawn care for your Austin property";
@@ -73,6 +76,11 @@ function sendDailyOutreach() {
       GmailApp.sendEmail(email, subject, body, {
         name: settings.senderName || settings.businessName || "Landscaping Services"
       });
+    }
+
+    if (CONFIG.dryRun) {
+      sent++;
+      continue;
     }
 
     const sheetRow = i + 1;
@@ -103,6 +111,7 @@ function sendFollowUps() {
 
     if (status !== "Emailed" || !email || optedOut || replyReceived) continue;
     if (!(nextFollowup instanceof Date) || nextFollowup > today) continue;
+    if (CONFIG.testMode && !isTestRecipient_(email)) continue;
 
     const lead = rowToLead_(row);
     const subject = "Following up on lawn care quote";
@@ -114,6 +123,11 @@ function sendFollowUps() {
       GmailApp.sendEmail(email, subject, body, {
         name: settings.senderName || settings.businessName || "Landscaping Services"
       });
+    }
+
+    if (CONFIG.dryRun) {
+      sent++;
+      continue;
     }
 
     const sheetRow = i + 1;
@@ -233,6 +247,10 @@ function contactTeamLabel_(lead) {
   if (lead.property_type === "school") return "Facilities Team";
   if (lead.property_type === "apartment_complex") return "Property Management Team";
   return "Team";
+}
+
+function isTestRecipient_(email) {
+  return String(email).trim().toLowerCase() === CONFIG.testRecipientEmail.toLowerCase();
 }
 
 function readSettings_() {

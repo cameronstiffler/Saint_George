@@ -64,9 +64,11 @@ This package contains the first working version of a low-cost lead-generation an
    - Go to Extensions > Apps Script.
    - Paste `google_apps_script_outreach.gs`.
    - Keep `dryRun: true`.
+   - Keep `testMode: true` while developing so only `cameronstiffler@gmail.com` can receive test emails.
    - Run `sendDailyOutreach`.
    - Check logs.
    - Only change `dryRun` to `false` after test output is correct.
+   - Only change `testMode` to `false` when real leads are reviewed, the physical mailing address is filled in, and live sending is approved.
 
 ## Outreach Safety
 
