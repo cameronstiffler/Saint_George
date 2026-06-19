@@ -91,9 +91,13 @@
       height:auto;
       margin:-18px -12px 0 auto;
     }
-    .hero-video {
-      aspect-ratio:1 / 1;
-      object-fit:contain;
+    .section-video {
+      display:block;
+      width:100%;
+      max-width:520px;
+      margin-top:22px;
+      border-radius:8px;
+      background:#0f2415;
     }
     .btns { display:flex; gap:14px; flex-wrap:wrap; }
     .btn {
@@ -120,7 +124,7 @@
       background:var(--card);
     }
     .card h3 { margin-top:0; }
-    .band { background:var(--light); }
+    .band { background:#fff; }
     .two {
       display:grid;
       grid-template-columns:1.1fr .9fr;
@@ -203,9 +207,7 @@
           <a class="btn secondary" href="tel:+14158183367">Call Now</a>
         </div>
       </div>
-      <video class="hero-logo hero-video" autoplay muted loop playsinline poster="logo/current/site-logo-detail.png" aria-label="Saint George Landscaping topiary video">
-        <source src="img/Man_shapes_dragon_topiary_202606190600.mp4" type="video/mp4">
-      </video>
+      <img class="hero-logo" src="logo/current/site-logo-detail.png" width="1200" height="1200" alt="Saint George Landscaping logo">
     </div>
   </div>
 </header>
@@ -234,6 +236,9 @@
         <li>HOAs</li>
         <li>Large residential properties</li>
       </ul>
+      <video class="section-video" autoplay muted loop playsinline controls poster="logo/current/site-logo-detail.png" aria-label="Saint George Landscaping topiary video">
+        <source src="img/Man_shapes_dragon_topiary_202606190600.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="contact-box">
       <h2>Request a Quote</h2>
