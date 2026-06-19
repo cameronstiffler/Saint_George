@@ -1,0 +1,41 @@
+[
+  {
+    "id": "austin_landscape_000001",
+    "business_name": "SAMPLE - Large Apartment Community",
+    "property_type": "apartment_complex",
+    "priority_score": 85,
+    "address": {
+      "street": "123 Example Dr",
+      "city": "Austin",
+      "state": "TX",
+      "zip": "78745"
+    },
+    "website": "https://example.com",
+    "contact": {
+      "contact_name": null,
+      "role": "Property Manager",
+      "email": "manager@example.com",
+      "phone": "512-000-0000",
+      "contact_page": "https://example.com/contact",
+      "source": "public website"
+    },
+    "property_clues": {
+      "large_lawn_likely": true,
+      "has_courtyard": true,
+      "has_multiple_buildings": true,
+      "notes": "Sample only. Replace with real prospect."
+    },
+    "outreach": {
+      "status": "Ready to Email",
+      "last_contacted": null,
+      "next_followup": null,
+      "opted_out": false,
+      "reply_received": false
+    },
+    "source_urls": [
+      "https://example.com"
+    ],
+    "created_at": "2026-06-18",
+    "updated_at": "2026-06-18"
+  }
+]

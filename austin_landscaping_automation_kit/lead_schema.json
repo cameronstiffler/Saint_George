@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Austin Landscaping Lead",
+  "type": "object",
+  "required": [
+    "id",
+    "business_name",
+    "property_type",
+    "priority_score",
+    "address",
+    "contact",
+    "outreach",
+    "source_urls",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "business_name": {
+      "type": "string"
+    },
+    "property_type": {
+      "type": "string"
+    },
+    "priority_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "city": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "state": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "zip": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "website": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "contact_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "role": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phone": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "contact_page": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "property_clues": {
+      "type": "object",
+      "properties": {
+        "large_lawn_likely": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "has_courtyard": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "has_multiple_buildings": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "outreach": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "last_contacted": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "next_followup": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "opted_out": {
+          "type": "boolean"
+        },
+        "reply_received": {
+          "type": "boolean"
+        }
+      }
+    },
+    "source_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}
