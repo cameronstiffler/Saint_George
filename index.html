@@ -28,22 +28,9 @@
     header {
       position:relative;
       overflow:hidden;
-      background:
-        radial-gradient(circle at 72% 42%, rgba(255,255,255,.11), transparent 25%),
-        linear-gradient(135deg, var(--hero-deep), var(--hero-green));
+      background:var(--hero-deep) url("img/top_back.png") center / cover no-repeat;
       color:#fff;
       padding:0 20px 72px;
-    }
-    header::before {
-      content:"";
-      position:absolute;
-      inset:76px 0 0;
-      pointer-events:none;
-      opacity:.14;
-      background:
-        radial-gradient(ellipse at 18% 22%, transparent 0 32px, rgba(255,255,255,.7) 33px 35px, transparent 36px),
-        radial-gradient(ellipse at 84% 74%, transparent 0 42px, rgba(255,255,255,.7) 43px 45px, transparent 46px);
-      background-size:180px 140px, 220px 170px;
     }
     .wrap { max-width:1040px; margin:auto; }
     nav {
@@ -57,8 +44,8 @@
     }
     .brand {
       font-family:Georgia, "Times New Roman", serif;
-      font-weight:700;
-      font-size:30px;
+      font-weight:400;
+      font-size:31px;
       line-height:1.1;
       text-shadow:0 2px 3px rgba(0,0,0,.35);
     }
@@ -197,7 +184,7 @@
 <header>
   <div class="wrap">
     <nav>
-      <div class="brand">Saint George</div>
+      <div class="brand">Saint George Landscaping</div>
       <div class="nav-actions">
         <a class="nav-link" href="tel:+14158183367">(415) 818-3367</a>
         <a class="nav-link" href="#contact">Request a Quote</a>
@@ -212,7 +199,7 @@
           <a class="btn secondary" href="tel:+14158183367">Call Now</a>
         </div>
       </div>
-      <img class="hero-logo" src="logo/current/site-logo-transparent.png" width="1200" height="1200" alt="Saint George Landscaping logo">
+      <img class="hero-logo" src="logo/current/site-logo-detail.png" width="1200" height="1200" alt="Saint George Landscaping logo">
     </div>
   </div>
 </header>
